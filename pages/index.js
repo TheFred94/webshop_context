@@ -1,11 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import Product from "@/components/Product";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -15,8 +11,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="Home">
-        <article></article>
+        {data.map((product) => (
+          <Product {...product} />
+        ))}
+        <article>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </article>
       </div>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  // Get data from api
+  const res = await fetch("https://kea-alt-del.dk/t7/api/products");
+  const data = await res.json();
+
+  // Return the data inside props
+  return {
+    props: {
+      data: data,
+    },
+  };
 }

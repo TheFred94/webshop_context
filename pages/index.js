@@ -12,7 +12,7 @@ export default function Home({ data }) {
       </Head>
       <div className="Home">
         {data.map((product) => (
-          <Product {...product} />
+          <Product key={product.id} {...product} />
         ))}
         <article>
           <pre>{JSON.stringify(data, null, 2)}</pre>

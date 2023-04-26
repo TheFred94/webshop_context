@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
     // Wrappin the Layout component in the StoreProvider makes Layout able to ascess the data in the StoreProvider.
     <StoreProvider>
       <Layout>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </Layout>
     </StoreProvider>
   );
